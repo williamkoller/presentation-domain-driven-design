@@ -56,7 +56,7 @@ export class Product {
   public ToJSON() {
     return {
       id: this.id.toString(),
-      name: this.name,
+      name: this.name.getValue(),
       description: this.description,
     };
   }
