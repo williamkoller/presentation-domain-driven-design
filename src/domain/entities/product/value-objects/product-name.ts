@@ -7,7 +7,7 @@ export class ProductName {
   public static create(name: string): Result<ProductName> {
     const guard = DomainGuard.combine([
       DomainGuard.notEmpty(name, 'Product name'),
-      DomainGuard.minLength(name, 3, 'PRoduct name'),
+      DomainGuard.minLength(name, 3, 'Product name'),
       DomainGuard.maxLength(name, 50, 'Product name'),
     ]);
 
@@ -23,7 +23,7 @@ export class ProductName {
   public setProductName(value: string): Result<ProductName> {
     const guard = DomainGuard.combine([
       DomainGuard.notEmpty(value, 'Product name'),
-      DomainGuard.minLength(value, 3, 'PRoduct name'),
+      DomainGuard.minLength(value, 3, 'Product name'),
       DomainGuard.maxLength(value, 50, 'Product name'),
     ]);
 

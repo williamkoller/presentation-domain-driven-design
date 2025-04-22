@@ -5,4 +5,8 @@ export class OrderCreatedEvent implements DomainEvent {
   eventName = 'OrderCreated';
 
   constructor(private readonly orderId: string) {}
+
+  public getOrderId(): string {
+    return this.orderId;
+  }
 }

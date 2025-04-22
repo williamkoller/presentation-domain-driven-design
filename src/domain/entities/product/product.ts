@@ -26,11 +26,11 @@ export class Product {
     return this._description;
   }
 
-  setName(value: ProductName) {
+  public setName(value: ProductName) {
     this._name.setProductName(value.getValue());
   }
 
-  setDescription(value: string) {
+  public setDescription(value: string) {
     this._description = value;
   }
 

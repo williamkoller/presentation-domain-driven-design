@@ -1,0 +1,46 @@
+import { Order } from './domain/entities/order/order';
+import { OrderItem } from './domain/entities/order/order-item';
+import { Product } from './domain/entities/product/product';
+import { ProductName } from './domain/entities/product/value-objects/product-name';
+import { OrderItemTotalService } from './domain/services/order/order-item-total.service';
+import { UniqueId } from './shared/domain/unique-id/unique-id';
+
+console.time('Took');
+
+const productName = ProductName.create('Livro');
+
+const product = Product.create(productName.value, 'Introdução á linguagem Go');
+
+const orderItemOneResult = OrderItem.create(
+  new UniqueId(product.id.toString()),
+  100
+);
+const orderItemTwoResult = OrderItem.create(
+  new UniqueId(product.id.toString()),
+  200
+);
+
+if (orderItemOneResult.isFailure || orderItemTwoResult.isFailure) {
+  throw new Error('Failed to create order items');
+}
+
+const orderItemOne = orderItemOneResult.value;
+const orderItemTwo = orderItemTwoResult.value;
+
+const order = Order.create(new UniqueId().toString(), [
+  orderItemOne,
+  orderItemTwo,
+]);
+const orderQuantity = OrderItemTotalService.calculateTotalQuantity(
+  order.value.getItems()
+);
+
+console.log({
+  product: product.ToJSON(),
+  orderItemOne: orderItemOne.toJSON(),
+  orderItemTwo: orderItemTwo.toJSON(),
+  order: order.value.toJSON(),
+  orderItemTotal: orderQuantity,
+});
+
+console.timeEnd('Took');

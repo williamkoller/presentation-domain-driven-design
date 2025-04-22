@@ -27,4 +27,11 @@ export class Order extends AggregateRoot<OrderItem> {
   public getItems(): OrderItem[] {
     return this.items;
   }
+
+  public toJSON() {
+    return this.items.map((i) => ({
+      productId: i.getProductId().toString(),
+      quantity: i.getQuantity(),
+    }));
+  }
 }
