@@ -2,6 +2,9 @@
 
 Este projeto utiliza uma arquitetura baseada nos princípios do **Domain-Driven Design (DDD)**, com o objetivo de organizar o código de forma clara, escalável e de fácil manutenção. Abaixo, explicamos os principais conceitos e benefícios dessa abordagem.
 
+## **Requisitos**
+
+- **Node.js v22.12.0**: Certifique-se de ter o Node.js instalado em sua máquina. Você pode baixar a versão mais recente em [nodejs.org](https://nodejs.org/).
 ---
 
 ## **Arquitetura**
