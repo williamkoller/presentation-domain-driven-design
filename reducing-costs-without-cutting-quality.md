@@ -19,7 +19,7 @@ Demonstrar práticas, padrões e ferramentas em TypeScript que permitem reduzir 
 
 ### 2. Arquitetura Sólida e Modular
 - **Domain-Driven Design (DDD)**
-- Separação em camadas: `domain`, `shared`
+- Separação em camadas: `domain`, `shared`, `core`, 
 - Uso de **abstrações e interfaces** para facilitar testes e manutenção
 
 ### 3. Foco no Valor de Negócio

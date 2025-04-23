@@ -55,3 +55,38 @@ Abaixo está um gráfico inspirado no livro de DDD, representando a separação 
 +-----------------------+
 |     Infrastructure    |  <- Lida com detalhes técnicos, não implementado
 +-----------------------+
+```
+
+## **Exemplo de Uso**
+
+```bash
+> presentation-domain-driven-design@1.0.0 start
+> node --import=tsx src/main.ts
+
+{
+  product: {
+    id: '596d11bc-ca97-4db5-a9cd-56b6a08fece2',
+    name: 'Livro',
+    description: 'Introdução á linguagem Go'
+  },
+  orderItemOne: { productId: '596d11bc-ca97-4db5-a9cd-56b6a08fece2', quantity: 100 },
+  orderItemTwo: { productId: '596d11bc-ca97-4db5-a9cd-56b6a08fece2', quantity: 200 },
+  order: [
+    {
+      productId: '596d11bc-ca97-4db5-a9cd-56b6a08fece2',
+      quantity: 100
+    },
+    {
+      productId: '596d11bc-ca97-4db5-a9cd-56b6a08fece2',
+      quantity: 200
+    }
+  ],
+  orderItemTotal: 300,
+  orderCreatedEvent: {
+    orderId: '572233ee-6c0d-40ef-99e4-6186c6f73267',
+    occurredAt: 2025-04-23T16:27:24.273Z,
+    eventName: 'OrderCreated'
+  }
+}
+Took: 2.253ms
+```
