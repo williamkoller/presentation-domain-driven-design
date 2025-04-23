@@ -35,15 +35,17 @@ const order = Order.create(new UniqueId().toString(), [
 const orderQuantity = OrderItemTotalService.calculateTotalQuantity(
   order.value.getItems()
 );
-const orderCreatedEvent = new OrderCreatedEvent(order.value.id.toString());
 
 console.log({
   product: product.value.ToJSON(),
   orderItemOne: orderItemOne.toJSON(),
   orderItemTwo: orderItemTwo.toJSON(),
-  order: order.value.toJSON(),
+  order: JSON.stringify(order.value.toJSON()),
   orderItemTotal: orderQuantity,
-  orderCreatedEvent: orderCreatedEvent.toJSON(),
+  orderCreatedEvent: order.value.domainEvents.map((e) => ({
+    eventName: e.eventName,
+    orderId: (e as OrderCreatedEvent).getOrderId(),
+  })),
 });
 
 console.timeEnd('Took');

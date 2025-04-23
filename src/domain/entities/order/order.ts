@@ -10,7 +10,6 @@ export class Order extends AggregateRoot<OrderItem> {
   private constructor(id: string, items: OrderItem[]) {
     super(id);
     this.items = items;
-    this.addDomainEvent(new OrderCreatedEvent(id));
   }
 
   public static create(id: string, items: OrderItem[]): Result<Order> {
@@ -21,17 +20,30 @@ export class Order extends AggregateRoot<OrderItem> {
 
     if (guard.isFailure) return Result.fail(guard.error!);
 
-    return Result.ok(new Order(id, items));
+    const order = new Order(id, items);
+    order.registerOrderCreatedEvent();
+
+    return Result.ok(order);
   }
+
 
   public getItems(): OrderItem[] {
     return this.items;
   }
 
+  public registerOrderCreatedEvent(): void {
+    this.addDomainEvent(new OrderCreatedEvent(this._id));
+  }
+
   public toJSON() {
-    return this.items.map((i) => ({
+    const items = this.getItems().map((i) => ({
       productId: i.getProductId().toString(),
       quantity: i.getQuantity(),
     }));
+
+    return {
+      id: this._id,
+      items,
+    };
   }
 }

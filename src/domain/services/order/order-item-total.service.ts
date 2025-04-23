@@ -2,9 +2,9 @@ import { OrderItem } from '../../entities/order/order-item';
 
 export class OrderItemTotalService {
   /**
-   * Calculates the total quantity from a list of OrderItems.
-   * @param items Array of OrderItem instances
-   * @returns Total quantity as a number
+   * Calcula a quantidade total a partir de uma lista de OrderItems.
+   * @param items Array de instâncias de OrderItem
+   * @returns Quantidade total como um número
    */
   public static calculateTotalQuantity(items: OrderItem[]): number {
     return items.reduce((total, item) => {
