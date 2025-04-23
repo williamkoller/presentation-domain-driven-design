@@ -4,7 +4,7 @@ export abstract class AggregateRoot<T> {
   protected readonly _id: string;
   private _domainEvents: DomainEvent[] = [];
 
-  constructor(id: string) {
+  protected constructor(id: string) {
     this._id = id;
   }
 
