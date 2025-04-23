@@ -4,7 +4,7 @@ Este projeto utiliza uma arquitetura baseada nos princípios do **Domain-Driven 
 
 ## **Requisitos**
 
-- **Node.js v22.12.0**: Certifique-se de ter o Node.js instalado em sua máquina. Você pode baixar a versão mais recente em [nodejs.org](https://nodejs.org/).
+- **Node.js v22.12.0**: Certifique-se de ter o Node.js instalado em sua máquina. Você deve usar a mesma versão do projeto, veja a versão no arquivo `.nvmrc`.
 ---
 
 ## **Arquitetura**
