@@ -19,8 +19,14 @@ describe(Order.name, () => {
     expect(order.getItems()).toHaveLength(2);
 
     const json = order.toJSON();
-    expect(json[0]).toHaveProperty('productId');
-    expect(json[0]).toHaveProperty('quantity');
+    expect(json).toHaveProperty('id', id);
+    expect(json).toHaveProperty('items');
+    expect(json.items).toEqual(
+        items.map((item) => ({
+          productId: item.getProductId().toString(),
+          quantity: item.getQuantity(),
+        }))
+    );
 
     const events = (order as any)._domainEvents || [];
     expect(events.length).toBeGreaterThanOrEqual(1);
@@ -45,11 +51,14 @@ describe(Order.name, () => {
     const order = Order.create(id, [item]).value;
 
     const json = order.toJSON();
-    expect(json).toEqual([
-      {
-        productId: item.getProductId().toString(),
-        quantity: item.getQuantity(),
-      },
-    ]);
+    expect(json).toEqual({
+      id,
+      items: [
+        {
+          productId: item.getProductId().toString(),
+          quantity: item.getQuantity(),
+        },
+      ],
+    });
   });
 });
