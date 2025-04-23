@@ -2,6 +2,7 @@ import { Order } from './domain/entities/order/order';
 import { OrderItem } from './domain/entities/order/order-item';
 import { Product } from './domain/entities/product/product';
 import { ProductName } from './domain/entities/product/value-objects/product-name';
+import { OrderCreatedEvent } from './domain/events/order/order-created-event';
 import { OrderItemTotalService } from './domain/services/order/order-item-total.service';
 import { UniqueId } from './shared/domain/unique-id/unique-id';
 
@@ -12,11 +13,11 @@ const productName = ProductName.create('Livro');
 const product = Product.create(productName.value, 'Introdução á linguagem Go');
 
 const orderItemOneResult = OrderItem.create(
-  new UniqueId(product.id.toString()),
+  new UniqueId(product.value.id.toString()),
   100
 );
 const orderItemTwoResult = OrderItem.create(
-  new UniqueId(product.id.toString()),
+  new UniqueId(product.value.id.toString()),
   200
 );
 
@@ -34,13 +35,15 @@ const order = Order.create(new UniqueId().toString(), [
 const orderQuantity = OrderItemTotalService.calculateTotalQuantity(
   order.value.getItems()
 );
+const orderCreatedEvent = new OrderCreatedEvent(order.value.id.toString());
 
 console.log({
-  product: product.ToJSON(),
+  product: product.value.ToJSON(),
   orderItemOne: orderItemOne.toJSON(),
   orderItemTwo: orderItemTwo.toJSON(),
   order: order.value.toJSON(),
   orderItemTotal: orderQuantity,
+  orderCreatedEvent: orderCreatedEvent.toJSON(),
 });
 
 console.timeEnd('Took');

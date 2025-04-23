@@ -27,7 +27,7 @@ export class DomainGuard {
   ): Result<void> {
     return value >= min && value <= max
       ? Result.ok()
-      : Result.fail(`${field} must be betwenn ${min} and ${max}`);
+      : Result.fail(`${field} must be between ${min} and ${max}`);
   }
 
   static combine(results: Result<any>[]): Result<void> {

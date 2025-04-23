@@ -27,7 +27,7 @@ export class Product {
   }
 
   public setName(value: ProductName) {
-    this._name.setProductName(value.getValue());
+    this._name = value;
   }
 
   public setDescription(value: string) {
@@ -41,16 +41,26 @@ export class Product {
       DomainGuard.maxLength(this._description, 255, 'description'),
     ]);
 
-    if (guard.isFailure) Result.fail(guard.error!);
+    if (guard.isFailure) {
+      throw new Error(guard.error);
+    }
   }
 
   public static create(
     name: ProductName,
     description: string,
     id?: UniqueId
-  ): Product {
-    const productId = id ?? new UniqueId();
-    return new Product(name, description, productId);
+  ): Result<Product> {
+    const guard = DomainGuard.combine([
+      DomainGuard.notEmpty(description, 'description'),
+      DomainGuard.minLength(description, 10, 'description'),
+      DomainGuard.maxLength(description, 255, 'description'),
+    ]);
+
+    if (guard.isFailure) return Result.fail(guard.error!);
+
+    const product = new Product(name, description, id);
+    return Result.ok(product);
   }
 
   public ToJSON() {

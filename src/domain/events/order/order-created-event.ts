@@ -9,4 +9,12 @@ export class OrderCreatedEvent implements DomainEvent {
   public getOrderId(): string {
     return this.orderId;
   }
+
+  public toJSON(): object {
+    return {
+      orderId: this.getOrderId(),
+      occurredAt: this.occurredAt,
+      eventName: this.eventName,
+    };
+  }
 }

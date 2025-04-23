@@ -68,13 +68,13 @@ describe(DomainGuard.name, () => {
     it('should fail if number is below range', () => {
       const result = DomainGuard.isInRange(0, 1, 10, 'Age');
       expect(result.isFailure).toBe(true);
-      expect(result.error).toBe('Age must be betwenn 1 and 10');
+      expect(result.error).toBe('Age must be between 1 and 10');
     });
 
     it('should fail if number is above range', () => {
       const result = DomainGuard.isInRange(11, 1, 10, 'Age');
       expect(result.isFailure).toBe(true);
-      expect(result.error).toBe('Age must be betwenn 1 and 10');
+      expect(result.error).toBe('Age must be between 1 and 10');
     });
   });
 
@@ -91,7 +91,7 @@ describe(DomainGuard.name, () => {
     it('should fail at the first failure', () => {
       const validations: Result<void>[] = [
         DomainGuard.notEmpty('', 'Name'),
-        DomainGuard.minLength('abc', 3, 'Name'), // won’t be reached
+        DomainGuard.minLength('abc', 3, 'Name'),
       ];
       const result = DomainGuard.combine(validations);
       expect(result.isFailure).toBe(true);
