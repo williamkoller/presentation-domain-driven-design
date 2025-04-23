@@ -14,29 +14,18 @@ Demonstrar práticas, padrões e ferramentas em TypeScript que permitem reduzir 
 ## ✅ Princípios Adotados
 
 ### 1. Automatização Inteligente
-- **CI/CD com GitHub Actions**
 - **Testes automatizados com Jest**
 - **Linting e formatadores com ESLint + Prettier**
 
 ### 2. Arquitetura Sólida e Modular
 - **Domain-Driven Design (DDD)**
-- Separação em camadas: `domain`, `application`, `infra`, `web`
+- Separação em camadas: `domain`, `shared`
 - Uso de **abstrações e interfaces** para facilitar testes e manutenção
 
 ### 3. Foco no Valor de Negócio
 - Entregas incrementais com foco em funcionalidades reais
 - Evite overengineering usando YAGNI & KISS
 - Feature toggles para reduzir riscos de rollout
-
-### 4. Observabilidade e Performance
-- Logs estruturados (p. ex. `pino`, `winston`)
-- Métricas e tracing com ferramentas como `OpenTelemetry`
-- Análise de bundle com `webpack-bundle-analyzer`
-
-### 5. Manutenibilidade e Escalabilidade
-- Tipagem forte e validações com `zod` ou `io-ts`
-- Testes unitários e de integração com cobertura automatizada
-- Monitoramento de performance e erros com Sentry
 
 ---
 
@@ -48,8 +37,7 @@ Demonstrar práticas, padrões e ferramentas em TypeScript que permitem reduzir 
 | Jest       | Testes automatizados |
 | ESLint     | Padrão de código |
 | Prettier   | Formatação |
-| Zod        | Validação de dados |
-| GitHub Actions | CI/CD automatizado |
+
 
 ---
 
@@ -94,8 +82,7 @@ Com TypeScript, você ganha confiança, clareza e economia ao mesmo tempo.
 
 ## 📎 Recursos Complementares
 
-- [Livro: Implementing DDD in TypeScript](#)
-- [DDD com Node.js - YouTube](#)
+- [DDD com Node.js - YouTube](https://www.youtube.com/watch?v=EmqdupU-RQk&list=PL0EjZr3fsjRiaHA1uVmE-CW8H-48HD6mG)
 - [Exemplos no repositório](./src)
 
 ---
