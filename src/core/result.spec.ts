@@ -36,3 +36,15 @@ describe(Result.name, () => {
     });
   });
 });
+
+describe('Result - value getter error cases', () => {
+  it('should throw if trying to get value of a failed result', () => {
+    const result = Result.fail<string>('Failure');
+    expect(() => result.value).toThrow('Cannot get value of failed result.');
+  });
+
+  it('should throw if trying to get undefined value from ok result', () => {
+    const result = Result.ok();
+    expect(() => result.value).toThrow('Cannot get value of failed result.');
+  });
+});

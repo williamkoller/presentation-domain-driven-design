@@ -19,6 +19,18 @@ describe(DomainGuard.name, () => {
       expect(result.isFailure).toBe(true);
       expect(result.error).toBe('Name should not be empty');
     });
+
+    it('should fail if value is undefined', () => {
+      const result = DomainGuard.notEmpty(undefined as any, 'Name');
+      expect(result.isFailure).toBe(true);
+      expect(result.error).toBe('Name should not be empty');
+    });
+
+    it('should fail if value is null', () => {
+      const result = DomainGuard.notEmpty(null as any, 'Name');
+      expect(result.isFailure).toBe(true);
+      expect(result.error).toBe('Name should not be empty');
+    });
   });
 
   describe('minLength', () => {
