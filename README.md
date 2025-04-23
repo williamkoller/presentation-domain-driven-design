@@ -68,28 +68,20 @@ Abaixo está um gráfico inspirado no livro de DDD, representando a separação 
 
 {
   product: {
-    id: '596d11bc-ca97-4db5-a9cd-56b6a08fece2',
+    id: '9ad47002-a9f0-47c8-8643-129c8b74de4c',
     name: 'Livro',
     description: 'Introdução á linguagem Go'
   },
-  orderItemOne: { productId: '596d11bc-ca97-4db5-a9cd-56b6a08fece2', quantity: 100 },
-  orderItemTwo: { productId: '596d11bc-ca97-4db5-a9cd-56b6a08fece2', quantity: 200 },
-  order: [
-    {
-      productId: '596d11bc-ca97-4db5-a9cd-56b6a08fece2',
-      quantity: 100
-    },
-    {
-      productId: '596d11bc-ca97-4db5-a9cd-56b6a08fece2',
-      quantity: 200
-    }
-  ],
+  orderItemOne: { productId: '9ad47002-a9f0-47c8-8643-129c8b74de4c', quantity: 100 },
+  orderItemTwo: { productId: '9ad47002-a9f0-47c8-8643-129c8b74de4c', quantity: 200 },
+  order: '{"id":"0648eb84-3e48-4974-9ac4-7b077f479f04","items":[{"productId":"9ad47002-a9f0-47c8-8643-129c8b74de4c","quantity":100},{"productId":"9ad47002-a9f0-47c8-8643-129c8b74de4c","quantity":200}]}',
   orderItemTotal: 300,
-  orderCreatedEvent: {
-    orderId: '572233ee-6c0d-40ef-99e4-6186c6f73267',
-    occurredAt: 2025-04-23T16:27:24.273Z,
-    eventName: 'OrderCreated'
-  }
+  orderCreatedEvent: [
+    {
+      eventName: 'OrderCreated',
+      orderId: '0648eb84-3e48-4974-9ac4-7b077f479f04'
+    }
+  ]
 }
-Took: 2.253ms
+Took: 1.667ms
 ```
