@@ -458,12 +458,6 @@ Contribuições são bem-vindas! Para contribuir:
 
 ---
 
-## 📄 Licença
-
-Este projeto está sob a licença ISC. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
-
----
-
 **Desenvolvido com ❤️ usando Domain-Driven Design**
 
 _Este projeto demonstra como o DDD pode transformar a forma como desenvolvemos software, criando sistemas mais expressivos, maintíveis e alinhados com o negócio._
