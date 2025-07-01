@@ -447,7 +447,6 @@ Contribuições são bem-vindas! Para contribuir:
 
 ### Links Úteis:
 
-- [DDD Community](https://dddcommunity.org/)
 - [Martin Fowler - DDD](https://martinfowler.com/tags/domain%20driven%20design.html)
 - [Microsoft - DDD Guide](https://docs.microsoft.com/en-us/dotnet/architecture/microservices/microservice-ddd-cqrs-patterns/)
 
