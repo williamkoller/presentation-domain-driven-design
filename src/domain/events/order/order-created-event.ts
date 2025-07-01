@@ -21,10 +21,13 @@ import { DomainEvent } from '../../../core/domain-event';
  * - `toJSON()`: Retorna o evento como objeto serializável (útil para logs, mensageria, persistência, etc).
  */
 export class OrderCreatedEvent implements DomainEvent {
-  occurredAt = new Date();
-  eventName = 'OrderCreated';
+  public readonly occurredAt: Date;
+  public readonly eventName: string;
 
-  constructor(private readonly orderId: string) {}
+  constructor(public readonly orderId: string) {
+    this.occurredAt = new Date();
+    this.eventName = 'OrderCreated';
+  }
 
   public getOrderId(): string {
     return this.orderId;

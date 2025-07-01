@@ -36,7 +36,6 @@ export class Identifier<T> {
     if (!(id instanceof this.constructor)) {
       return false;
     }
-
     return id.toValue() === this.value;
   }
 

@@ -3,6 +3,7 @@ import { OrderItem } from './domain/entities/order/order-item';
 import { Product } from './domain/entities/product/product';
 import { ProductName } from './domain/entities/product/value-objects/product-name';
 import { OrderCreatedEvent } from './domain/events/order/order-created-event';
+import { ProductCreatedEvent } from './domain/events/product/product-created-event';
 import { OrderItemTotalService } from './domain/services/order/order-item-total.service';
 import { UniqueId } from './shared/domain/unique-id/unique-id';
 
@@ -36,16 +37,23 @@ const orderQuantity = OrderItemTotalService.calculateTotalQuantity(
   order.value.getItems()
 );
 
-console.log({
-  product: product.value.ToJSON(),
-  orderItemOne: orderItemOne.toJSON(),
-  orderItemTwo: orderItemTwo.toJSON(),
-  order: JSON.stringify(order.value.toJSON()),
-  orderItemTotal: orderQuantity,
-  orderCreatedEvent: order.value.domainEvents.map((e) => ({
-    eventName: e.eventName,
-    orderId: (e as OrderCreatedEvent).getOrderId(),
-  })),
-});
+console.dir(
+  {
+    product: product.value.toJSON(),
+    orderItemOne: orderItemOne.toJSON(),
+    orderItemTwo: orderItemTwo.toJSON(),
+    order: order.value.toJSON(),
+    orderItemTotal: orderQuantity,
+    orderCreatedEvent: order.value.domainEvents.map((e) => ({
+      eventName: e.eventName,
+      orderId: (e as OrderCreatedEvent).getOrderId(),
+    })),
+    productEvent: product.value.domainEvents.map((e) => ({
+      eventName: e.eventName,
+      productId: (e as ProductCreatedEvent).getProductId(),
+    })),
+  },
+  { depth: null }
+);
 
 console.timeEnd('Took');

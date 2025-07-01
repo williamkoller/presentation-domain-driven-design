@@ -10,13 +10,14 @@ describe(Product.name, () => {
     const description = 'A high-end gaming laptop with great performance.';
     const product = Product.create(name, description);
 
-    expect(product.value.id).toBeInstanceOf(UniqueId);
+    expect(typeof product.value.id).toBe('string');
+    expect(product.value.id).toBeTruthy();
     expect(product.value.name.getValue()).toBe('Laptop');
     expect(product.value.description).toBe(description);
 
-    const json = product.value.ToJSON();
+    const json = product.value.toJSON();
     expect(json).toEqual({
-      id: product.value.id.toString(),
+      id: product.value.id,
       name: 'Laptop',
       description,
     });
@@ -56,6 +57,46 @@ describe(Product.name, () => {
 
     const product = Product.create(name, description, id);
 
-    expect(product.value.id.toString()).toBe('custom-123');
+    expect(product.value.id).toBe('custom-123');
+  });
+
+  it('should throw error when trying to set invalid description', () => {
+    const name = makeValidName();
+    const description = 'Valid description for testing purposes.';
+    const product = Product.create(name, description);
+
+    expect(() => {
+      product.value.setDescription('');
+    }).toThrow('description should not be empty');
+  });
+
+  it('should throw error when trying to set description that is too short', () => {
+    const name = makeValidName();
+    const description = 'Valid description for testing purposes.';
+    const product = Product.create(name, description);
+
+    expect(() => {
+      product.value.setDescription('short');
+    }).toThrow('description must be at least 10 characters');
+  });
+
+  it('should throw error when trying to set description that is too long', () => {
+    const name = makeValidName();
+    const description = 'Valid description for testing purposes.';
+    const product = Product.create(name, description);
+
+    const longDescription = 'a'.repeat(256);
+    expect(() => {
+      product.value.setDescription(longDescription);
+    }).toThrow('description must be at most 255 characters');
+  });
+
+  it('should create product and emit domain event', () => {
+    const name = makeValidName();
+    const description = 'A high-end gaming laptop with great performance.';
+    const product = Product.create(name, description);
+
+    expect(product.value.domainEvents).toHaveLength(1);
+    expect(product.value.domainEvents[0].eventName).toBe('ProductCreated');
   });
 });

@@ -20,6 +20,10 @@ class TestAggregate extends AggregateRoot<string> {
   public triggerEvent(event: DomainEvent) {
     this.addDomainEvent(event);
   }
+
+  toJSON() {
+    return { id: this.id };
+  }
 }
 
 describe('AggregateRoot', () => {

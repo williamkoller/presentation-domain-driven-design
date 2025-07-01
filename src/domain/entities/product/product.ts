@@ -1,21 +1,18 @@
+import { AggregateRoot } from '../../../core/aggregate-root';
 import { DomainGuard } from '../../../core/domain-guard';
 import { Result } from '../../../core/result';
 import { UniqueId } from '../../../shared/domain/unique-id/unique-id';
 import { ProductName } from './value-objects/product-name';
+import { ProductCreatedEvent } from '../../events/product/product-created-event';
 
-export class Product {
-  protected readonly _id: UniqueId;
+export class Product extends AggregateRoot<Product> {
   constructor(
     private _name: ProductName,
     private _description: string,
     id?: UniqueId
   ) {
-    this._id = id || new UniqueId();
+    super(id?.toString() || new UniqueId().toString());
     this.validate();
-  }
-
-  get id(): UniqueId {
-    return this._id;
   }
 
   get name(): ProductName {
@@ -26,12 +23,13 @@ export class Product {
     return this._description;
   }
 
-  public setName(value: ProductName) {
+  public setName(value: ProductName): void {
     this._name = value;
   }
 
-  public setDescription(value: string) {
+  public setDescription(value: string): void {
     this._description = value;
+    this.validate();
   }
 
   private validate(): void {
@@ -60,12 +58,18 @@ export class Product {
     if (guard.isFailure) return Result.fail(guard.error!);
 
     const product = new Product(name, description, id);
+    product.addDomainEvent(new ProductCreatedEvent(product.id));
+
     return Result.ok(product);
   }
 
-  public ToJSON() {
+  public toJSON(): {
+    id: string;
+    name: string;
+    description: string;
+  } {
     return {
-      id: this.id.toString(),
+      id: this.id,
       name: this.name.getValue(),
       description: this.description,
     };

@@ -33,11 +33,13 @@ export abstract class AggregateRoot<T> {
     return this._domainEvents;
   }
 
-  protected addDomainEvent(event: DomainEvent): void {
-    this._domainEvents.push(event);
+  protected addDomainEvent(domainEvent: DomainEvent): void {
+    this._domainEvents.push(domainEvent);
   }
 
   public clearEvents(): void {
     this._domainEvents = [];
   }
+
+  abstract toJSON(): any;
 }

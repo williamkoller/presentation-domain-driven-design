@@ -26,7 +26,6 @@ export class Order extends AggregateRoot<OrderItem> {
     return Result.ok(order);
   }
 
-
   public getItems(): OrderItem[] {
     return this.items;
   }
@@ -35,15 +34,13 @@ export class Order extends AggregateRoot<OrderItem> {
     this.addDomainEvent(new OrderCreatedEvent(this._id));
   }
 
-  public toJSON() {
-    const items = this.getItems().map((i) => ({
-      productId: i.getProductId().toString(),
-      quantity: i.getQuantity(),
-    }));
-
+  public toJSON(): {
+    id: string;
+    items: ReturnType<OrderItem['toJSON']>[];
+  } {
     return {
       id: this._id,
-      items,
+      items: this.getItems().map((item) => item.toJSON()),
     };
   }
 }
