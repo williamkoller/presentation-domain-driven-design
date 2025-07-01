@@ -5,6 +5,7 @@ Este projeto utiliza uma arquitetura baseada nos princípios do **Domain-Driven 
 ## **Requisitos**
 
 - **Node.js v22.12.0**: Certifique-se de ter o Node.js instalado em sua máquina. Você deve usar a mesma versão do projeto, veja a versão no arquivo `.nvmrc`.
+
 ---
 
 ## **Arquitetura**
@@ -21,22 +22,26 @@ A estrutura do projeto é organizada em camadas e conceitos principais do DDD:
 ## **Benefícios da Arquitetura**
 
 1. **Clareza e Organização**:
-    - Cada camada tem uma responsabilidade bem definida, facilitando a leitura e entendimento do código.
-    - As regras de negócio estão isoladas no domínio, tornando-as independentes de detalhes técnicos.
+
+   - Cada camada tem uma responsabilidade bem definida, facilitando a leitura e entendimento do código.
+   - As regras de negócio estão isoladas no domínio, tornando-as independentes de detalhes técnicos.
 
 2. **Escalabilidade**:
-    - A separação de responsabilidades permite adicionar novas funcionalidades sem impactar outras partes do sistema.
-    - Facilita a integração com novas tecnologias ou mudanças na infraestrutura.
+
+   - A separação de responsabilidades permite adicionar novas funcionalidades sem impactar outras partes do sistema.
+   - Facilita a integração com novas tecnologias ou mudanças na infraestrutura.
 
 3. **Reutilização de Código**:
-    - Componentes como `Value Objects` e `Domain Events` podem ser reutilizados em diferentes partes do sistema.
+
+   - Componentes como `Value Objects` e `Domain Events` podem ser reutilizados em diferentes partes do sistema.
 
 4. **Facilidade de Testes**:
-    - A lógica de negócio pode ser testada isoladamente, sem dependências externas.
+
+   - A lógica de negócio pode ser testada isoladamente, sem dependências externas.
 
 5. **Redução de Tempo de Desenvolvimento**:
-    - A organização clara reduz o tempo gasto para entender e modificar o código.
-    - Novos desenvolvedores podem se integrar rapidamente ao projeto.
+   - A organização clara reduz o tempo gasto para entender e modificar o código.
+   - Novos desenvolvedores podem se integrar rapidamente ao projeto.
 
 ---
 
@@ -68,20 +73,37 @@ Abaixo está um gráfico inspirado no livro de DDD, representando a separação 
 
 {
   product: {
-    id: '9ad47002-a9f0-47c8-8643-129c8b74de4c',
+    id: '78705bff-58a7-4035-8fbc-7a45d56255d8',
     name: 'Livro',
     description: 'Introdução á linguagem Go'
   },
-  orderItemOne: { productId: '9ad47002-a9f0-47c8-8643-129c8b74de4c', quantity: 100 },
-  orderItemTwo: { productId: '9ad47002-a9f0-47c8-8643-129c8b74de4c', quantity: 200 },
-  order: '{"id":"0648eb84-3e48-4974-9ac4-7b077f479f04","items":[{"productId":"9ad47002-a9f0-47c8-8643-129c8b74de4c","quantity":100},{"productId":"9ad47002-a9f0-47c8-8643-129c8b74de4c","quantity":200}]}',
+  orderItemOne: { productId: '78705bff-58a7-4035-8fbc-7a45d56255d8', quantity: 100 },
+  orderItemTwo: { productId: '78705bff-58a7-4035-8fbc-7a45d56255d8', quantity: 200 },
+  order: {
+    id: 'ce350a63-98a5-42fe-bde7-1e61c83d4cde',
+    items: [
+      {
+        productId: '78705bff-58a7-4035-8fbc-7a45d56255d8',
+        quantity: 100
+      },
+      {
+        productId: '78705bff-58a7-4035-8fbc-7a45d56255d8',
+        quantity: 200
+      }
+    ]
+  },
   orderItemTotal: 300,
   orderCreatedEvent: [
     {
       eventName: 'OrderCreated',
-      orderId: '0648eb84-3e48-4974-9ac4-7b077f479f04'
+      orderId: 'ce350a63-98a5-42fe-bde7-1e61c83d4cde'
+    }
+  ],
+  productEvent: [
+    {
+      eventName: 'ProductCreated',
+      productId: '78705bff-58a7-4035-8fbc-7a45d56255d8'
     }
   ]
 }
-Took: 1.667ms
 ```
